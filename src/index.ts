@@ -1,9 +1,6 @@
 import Fastify from 'fastify';
+import routes from './routes';
 const app = Fastify({ logger: true });
-
-app.get('/', function (request, reply) {
-    reply.send({ hello: 'word' });
-});
 
 async function start() {
     try {
@@ -13,5 +10,7 @@ async function start() {
         process.exit(1);
     }
 }
+
+app.register(routes);
 
 start();
