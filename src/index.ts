@@ -1,6 +1,10 @@
 import Fastify from 'fastify';
 import routes from './routes';
+import connectDB from './db/connection';
+
 const app = Fastify({ logger: true });
+app.register(connectDB);
+app.register(routes);
 
 async function start() {
     try {
@@ -10,7 +14,4 @@ async function start() {
         process.exit(1);
     }
 }
-
-app.register(routes);
-
 start();
