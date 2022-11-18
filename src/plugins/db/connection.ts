@@ -1,9 +1,10 @@
 import { FastifyInstance } from 'fastify';
 import { Sequelize } from 'sequelize';
+import fp from 'fastify-plugin';
 
 import config from '../../config/appConfig';
 
-export default async function (fastify: FastifyInstance) {
+export default fp(async function (fastify: FastifyInstance) {
     const sequelize = new Sequelize(config.postgresUri); // Example for postgres
     try {
         await sequelize.authenticate();
@@ -13,4 +14,4 @@ export default async function (fastify: FastifyInstance) {
         console.error('Unable to connect to the database:', error);
         throw error;
     }
-}
+});
